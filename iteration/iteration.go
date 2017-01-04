@@ -9,7 +9,7 @@ func (I *IterativeScorer) RollBall(pins int) {
 }
 
 func (I *IterativeScorer) CalculateScore() int {
-	return -1
+	return 0
 }
 
 func NewIterativeScorer() scorer.Scorer {
