@@ -46,6 +46,16 @@ func Test_ReturnsIterativeScoreSingleStrikeGame(t *testing.T) {
 	assert.Equal(t, 22, testObject.CalculateScore())
 }
 
+func Test_ReturnsIterativePerfectGame(t *testing.T) {
+	testObject := iteration.NewIterativeScorer()
+
+	for i := 0; i < 12; i++ {
+		rollStrike(testObject)
+	}
+
+	assert.Equal(t, 300, testObject.CalculateScore())
+}
+
 func rollStrike(s scorer.Scorer) {
 	s.RollBall(10)
 }
