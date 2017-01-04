@@ -35,6 +35,17 @@ func Test_ReturnsIterativeScoreSingleSpareGame(t *testing.T) {
 	assert.Equal(t, 16, testObject.CalculateScore())
 }
 
+func Test_ReturnsIterativeScoreSingleStrikeGame(t *testing.T) {
+	testObject := iteration.NewIterativeScorer()
+
+	rollStrike(testObject)
+	testObject.RollBall(3)
+	testObject.RollBall(3)
+	rollGutterBalls(testObject, 17)
+
+	assert.Equal(t, 22, testObject.CalculateScore())
+}
+
 func rollStrike(s scorer.Scorer) {
 	s.RollBall(10)
 }
