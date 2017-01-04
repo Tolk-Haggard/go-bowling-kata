@@ -13,18 +13,15 @@ type CorrectScorer struct {
 func (c *CorrectScorer) RollBall(pins int) {
 	c.rolls[c.currentRoll] = pins
 	if c.frameCount >= 10 {
-		c.doublers[c.currentRoll] = c.doublers[c.currentRoll] - 1
+		c.handleBonusFrame()
 	} else {
 		if c.firstRoll {
 			if pins == 10 {
-				c.doublers[c.currentRoll+1] = c.doublers[c.currentRoll+1] + 1
-				c.doublers[c.currentRoll+2] = c.doublers[c.currentRoll+2] + 1
-				c.firstRoll = false
-				c.frameCount++
+				c.handleStrike()
 			}
 		} else {
 			if pins+c.rolls[c.currentRoll-1] == 10 {
-				c.doublers[c.currentRoll+1] = c.doublers[c.currentRoll+1] + 1
+				c.handleSpare()
 			}
 			c.frameCount++
 		}
@@ -32,6 +29,21 @@ func (c *CorrectScorer) RollBall(pins int) {
 
 	c.firstRoll = !c.firstRoll
 	c.currentRoll++
+}
+
+func (c *CorrectScorer) handleStrike() {
+	c.doublers[c.currentRoll+1] = c.doublers[c.currentRoll+1] + 1
+	c.doublers[c.currentRoll+2] = c.doublers[c.currentRoll+2] + 1
+	c.firstRoll = false
+	c.frameCount++
+}
+
+func (c *CorrectScorer) handleSpare() {
+	c.doublers[c.currentRoll+1] = c.doublers[c.currentRoll+1] + 1
+}
+
+func (c *CorrectScorer) handleBonusFrame() {
+	c.doublers[c.currentRoll] = c.doublers[c.currentRoll] - 1
 }
 
 func (c *CorrectScorer) CalculateScore() (score int) {
