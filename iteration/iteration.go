@@ -3,7 +3,7 @@ package iteration
 import "github.com/Tolk-Haggard/go-bowling-kata/scorer"
 
 type IterativeScorer struct {
-	rolls       [22]int
+	rolls       [21]int
 	currentRoll int
 }
 
@@ -13,13 +13,17 @@ func (i *IterativeScorer) RollBall(pins int) {
 }
 
 func (i *IterativeScorer) CalculateScore() (score int) {
-	for j := 0; j < 21; j++ {
-		score += i.rolls[j]
-		if i.rolls[j] == 10 {
-			score += i.rolls[j+1] + i.rolls[j+2]
-		}
-		if i.rolls[j]+i.rolls[j+1] == 10 {
-			score += i.rolls[j+2]
+	roll := 0
+	for j := 0; j < 10; j++ {
+		if i.rolls[roll] == 10 {
+			score += 10 + i.rolls[j+1] + i.rolls[j+2]
+			roll++
+		} else if i.rolls[roll]+i.rolls[roll+1] == 10 {
+			score += 10 + i.rolls[roll+2]
+			roll += 2
+		} else {
+			score += i.rolls[roll] + i.rolls[roll+1]
+			roll += 2
 		}
 	}
 	return
