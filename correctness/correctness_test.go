@@ -45,3 +45,15 @@ func Test_ReturnsCorrectScorePerfectGame(t *testing.T) {
 
 	assert.Equal(t, 300, testObject.CalculateScore())
 }
+
+func Test_ReturnsCorrectScoreHeartBreakerGame(t *testing.T) {
+	testObject := correctness.NewCorrectScorer()
+
+	for i := 0; i < 10; i++ {
+		testObject.RollBall(10) //strike
+	}
+	testObject.RollBall(9)
+	testObject.RollBall(1)
+
+	assert.Equal(t, 289, testObject.CalculateScore())
+}
