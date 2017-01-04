@@ -35,3 +35,13 @@ func Test_ReturnsCorrectScoreComplexGame(t *testing.T) {
 
 	assert.Equal(t, 25+20+11+2+9, testObject.CalculateScore())
 }
+
+func Test_ReturnsCorrectScorePerfectGame(t *testing.T) {
+	testObject := correctness.NewCorrectScorer()
+
+	for i := 0; i < 12; i++ {
+		testObject.RollBall(10) //strike
+	}
+
+	assert.Equal(t, 300, testObject.CalculateScore())
+}
