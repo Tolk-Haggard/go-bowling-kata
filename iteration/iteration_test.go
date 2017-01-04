@@ -16,6 +16,15 @@ func Test_ReturnsIterativeScoreGutterGame(t *testing.T) {
 	assert.Equal(t, 0, testObject.CalculateScore())
 }
 
+func Test_ReturnsIterativeScoreSinglePinGame(t *testing.T) {
+	testObject := iteration.NewIterativeScorer()
+
+	testObject.RollBall(1)
+	rollGutterBalls(testObject, 19)
+
+	assert.Equal(t, 1, testObject.CalculateScore())
+}
+
 func rollStrike(s scorer.Scorer) {
 	s.RollBall(10)
 }
