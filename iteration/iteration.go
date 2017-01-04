@@ -15,6 +15,9 @@ func (i *IterativeScorer) RollBall(pins int) {
 func (i *IterativeScorer) CalculateScore() (score int) {
 	for j := 0; j < 21; j++ {
 		score += i.rolls[j]
+		if i.rolls[j] == 10 {
+			score += i.rolls[j+1] + i.rolls[j+2]
+		}
 		if i.rolls[j]+i.rolls[j+1] == 10 {
 			score += i.rolls[j+2]
 		}
