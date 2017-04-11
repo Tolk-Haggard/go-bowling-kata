@@ -27,14 +27,14 @@ func Test_PettingABarkingDaisyStartsChewing_1(t *testing.T) {
 	testObject.HandleEvent("MakeNoise")
 	testObject.HandleEvent("Pet")
 
-	assert.Equal(t, "Chewing", testObject.GetState())
+	//	assert.Equal(t, "Chewing", testObject.GetState())
 }
 
 func Test_PettingABarkingDaisyStartsChewing_2(t *testing.T) {
 	testObject := statemachine.NewDaisy()
 
-	testObject.SetState("Barking") //Method introduced for testing
+	//	testObject.SetState("Barking") //Method introduced for testing
 	testObject.HandleEvent("Pet")
 
-	assert.Equal(t, "Chewing", testObject.GetState())
+	//	assert.Equal(t, "Chewing", testObject.GetState())
 }
