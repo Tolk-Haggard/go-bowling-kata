@@ -31,40 +31,40 @@ func GlidedRose() {
 		items[i].sellIn = items[i].sellIn - 1
 
 		if items[i].name == "Backstage passes to a TAFKAL80ETC concert" {
-			items[i].quality = increaseQuality(items[i])
+			items[i].increaseQuality(1)
 			if items[i].sellIn < 10 {
-				items[i].quality = increaseQuality(items[i])
+				items[i].increaseQuality(1)
 			}
 			if items[i].sellIn < 5 {
-				items[i].quality = increaseQuality(items[i])
+				items[i].increaseQuality(1)
 			}
 			if items[i].sellIn < 0 {
 				items[i].quality = 0
 			}
 		} else if items[i].name == "Aged Brie" {
-			items[i].quality = increaseQuality(items[i])
+			items[i].increaseQuality(1)
 			if items[i].sellIn < 0 {
-				items[i].quality = increaseQuality(items[i])
+				items[i].increaseQuality(1)
 			}
 		} else {
-			items[i].quality = decreaseQuality(items[i])
+			items[i].decreaseQuality(1)
 			if items[i].sellIn < 0 {
-				items[i].quality = decreaseQuality(items[i])
+				items[i].decreaseQuality(1)
 			}
 		}
 	}
 }
 
-func increaseQuality(item Item) int {
-	if item.quality < 50 {
-		return item.quality + 1
+func (i *Item) increaseQuality(v int) {
+	i.quality += v
+	if i.quality > 50 {
+		i.quality = 50
 	}
-	return item.quality
 }
 
-func decreaseQuality(item Item) int {
-	if item.quality > 0 {
-		return item.quality - 1
+func (i *Item) decreaseQuality(v int) {
+	i.quality -= v
+	if i.quality < 0 {
+		i.quality = 0
 	}
-	return 0
 }
