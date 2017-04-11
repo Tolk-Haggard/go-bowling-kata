@@ -35,19 +35,13 @@ func GlidedRose() {
 				items[i].quality = items[i].quality - 1
 			}
 		} else {
-			if items[i].quality < 50 {
-				items[i].quality = items[i].quality + 1
-				if items[i].name == "Backstage passes to a TAFKAL80ETC concert" {
-					if items[i].sellIn < 10 {
-						if items[i].quality < 50 {
-							items[i].quality = items[i].quality + 1
-						}
-					}
-					if items[i].sellIn < 5 {
-						if items[i].quality < 50 {
-							items[i].quality = items[i].quality + 1
-						}
-					}
+			items[i].quality = increaseQuality(items[i])
+			if items[i].name == "Backstage passes to a TAFKAL80ETC concert" {
+				if items[i].sellIn < 10 {
+					items[i].quality = increaseQuality(items[i])
+				}
+				if items[i].sellIn < 5 {
+					items[i].quality = increaseQuality(items[i])
 				}
 			}
 		}
@@ -62,11 +56,16 @@ func GlidedRose() {
 					items[i].quality = items[i].quality - items[i].quality
 				}
 			} else {
-				if items[i].quality < 50 {
-					items[i].quality = items[i].quality + 1
-				}
+				items[i].quality = increaseQuality(items[i])
 			}
 		}
 	}
 
+}
+
+func increaseQuality(item Item) int {
+	if item.quality < 50 {
+		return item.quality + 1
+	}
+	return item.quality
 }
