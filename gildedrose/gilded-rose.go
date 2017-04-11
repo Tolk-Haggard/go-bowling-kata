@@ -31,9 +31,7 @@ func GlidedRose() {
 		items[i].sellIn = items[i].sellIn - 1
 
 		if items[i].name != "Aged Brie" && items[i].name != "Backstage passes to a TAFKAL80ETC concert" {
-			if items[i].quality > 0 {
-				items[i].quality = items[i].quality - 1
-			}
+			items[i].quality = decreaseQuality(items[i])
 		} else {
 			items[i].quality = increaseQuality(items[i])
 			if items[i].name == "Backstage passes to a TAFKAL80ETC concert" {
@@ -49,9 +47,7 @@ func GlidedRose() {
 		if items[i].sellIn < 0 {
 			if items[i].name != "Aged Brie" {
 				if items[i].name != "Backstage passes to a TAFKAL80ETC concert" {
-					if items[i].quality > 0 {
-						items[i].quality = items[i].quality - 1
-					}
+					items[i].quality = decreaseQuality(items[i])
 				} else {
 					items[i].quality = items[i].quality - items[i].quality
 				}
@@ -68,4 +64,11 @@ func increaseQuality(item Item) int {
 		return item.quality + 1
 	}
 	return item.quality
+}
+
+func decreaseQuality(item Item) int {
+	if item.quality > 0 {
+		return item.quality - 1
+	}
+	return 0
 }
